@@ -223,6 +223,7 @@ div.buttonbox button:hover {
 
 .postcontent p {
     padding: 10px;
+    overflow-wrap: break-word;
 }
 
 .none {

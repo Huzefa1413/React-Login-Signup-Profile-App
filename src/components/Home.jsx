@@ -67,35 +67,41 @@ const Home = () => {
                 setPostText("");
             }
             else {
-                document.getElementById("postinput").value = "";
-                document.getElementById("image").value = "";
-                const cloudinaryData = new FormData();
-                cloudinaryData.append("file", image);
-                cloudinaryData.append("upload_preset", "myFacebookPictures")
-                cloudinaryData.append("cloud_name", "huzefa")
-                axios.post(`https://api.cloudinary.com/v1_1/huzefa/image/upload`, cloudinaryData, { headers: { 'Content-Type': 'multipart/form-data' } })
-                    .then(async res => {
-                        try {
-                            const docRef1 = await addDoc(collection(db, 'posts'), {
-                                text: postText,
-                                createdOn: serverTimestamp(),
-                                img: res?.data?.url,
-                                username: loggedusername,
-                            });
-                            const docRef = await addDoc(collection(db, 'users', loggedUser, 'posts'), {
-                                text: postText,
-                                createdOn: serverTimestamp(),
-                                img: res?.data?.url,
-                                username: loggedusername,
-                                postId: docRef1.id,
-                            });
-                            setIsLoading(false)
-                        } catch (e) {
-                            console.error("Error adding document: ", e);
-                        }
-                    })
-                setImage(null);
-                setPostText("");
+                if (image.type.slice(0, 5) === 'image') {
+                    document.getElementById("postinput").value = "";
+                    document.getElementById("image").value = "";
+                    const cloudinaryData = new FormData();
+                    cloudinaryData.append("file", image);
+                    cloudinaryData.append("upload_preset", "myFacebookPictures")
+                    cloudinaryData.append("cloud_name", "huzefa")
+                    axios.post(`https://api.cloudinary.com/v1_1/huzefa/image/upload`, cloudinaryData, { headers: { 'Content-Type': 'multipart/form-data' } })
+                        .then(async res => {
+                            try {
+                                const docRef1 = await addDoc(collection(db, 'posts'), {
+                                    text: postText,
+                                    createdOn: serverTimestamp(),
+                                    img: res?.data?.url,
+                                    username: loggedusername,
+                                });
+                                const docRef = await addDoc(collection(db, 'users', loggedUser, 'posts'), {
+                                    text: postText,
+                                    createdOn: serverTimestamp(),
+                                    img: res?.data?.url,
+                                    username: loggedusername,
+                                    postId: docRef1.id,
+                                });
+                                setIsLoading(false)
+                            } catch (e) {
+                                console.error("Error adding document: ", e);
+                            }
+                        })
+                    setImage(null);
+                    setPostText("");
+                }
+                else {
+                    alert('Only Images are allowed to upload! Invalid Image');
+                    setIsLoading(false);
+                }
             }
         }
     }
