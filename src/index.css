@@ -1,13 +1,334 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+    background-color: rgb(218, 205, 205);
+}
+
+form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0rem 20px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.title {
+    font-size: 2.2rem;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.input-field {
+    width: 70%;
+    background-color: #f0f0f0;
+    margin: 10px 0;
+    height: 55px;
+    border-radius: 55px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+}
+
+.input-field input {
+    background: none;
+    outline: none;
+    border: none;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+    width: 100%;
+}
+
+.input-field input::placeholder {
+    color: #aaa;
+    font-weight: 500;
+}
+
+.btn {
+    width: 150px;
+    border: none;
+    outline: none;
+    height: 49px;
+    border-radius: 49px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: 0.5s;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #46cac4;
+}
+
+span {
+    width: 67%;
+    padding-left: 20px;
+    color: red;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+}
+
+.home-profile {
+    height: 100%;
+    display: flex;
+    width: 50%;
+    justify-content: space-evenly;
+}
+
+.home-profile div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.home-profile div img {
+    width: 50px;
+    border-radius: 100%;
+    background-color: white;
+    padding: 5px;
+    margin-bottom: 3px;
+}
+
+.home-profile div img.selected {
+    background-color: gray;
+}
+
+.logout {
+    color: black;
+    font-size: large;
+}
+
+div.addpost {
+    width: 600px;
+    margin: 20px auto;
+    border-radius: 20px;
+    border: 1px solid black;
+}
+
+div.addpost div.top {
+    width: 100%;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+div.addpost div.top img {
+    width: 40px;
+    border-radius: 100%;
+}
+
+div.addpost div.top input {
+    height: 40px;
+    width: 90%;
+    border-radius: 50px;
+    border: 0px;
+    padding-left: 20px;
+    background-color: aqua;
+}
+
+div.addpost div.top input:hover {
+    background-color: rgba(0, 255, 255, 0.2);
+}
+
+div.addpost div.bottom {
+    padding: 10px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+div.addpost div.bottom div.button {
+    width: fit-content;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: aqua;
+}
+
+div.addpost div.bottom div.button:hover {
+    background-color: rgba(0, 255, 255, 0.2);
+}
+
+div.addpost div.bottom div.button img {
+    width: 30px;
+    margin-right: 10px;
+}
+
+div.addpost div.bottom div.button p {
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+div.post {
+    width: 600px;
+    margin: 20px auto;
+    border-radius: 20px;
+    padding: 0px 20px;
+    border: 1px solid black;
+}
+
+div.post div.posthead {
+    width: 100%;
+    padding: 10px 0px;
+}
+
+div.post div.posthead div.picname {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+div.post div.posthead div.picname img {
+    width: 40px;
+    margin-right: 20px;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+div.buttonbox {
+    padding: 10px 0px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+div.buttonbox button {
+    width: 100px;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 0px;
+    font-size: 17px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+div.buttonbox button:hover {
+    background-color: rgba(0, 255, 255, 0.2);
+}
+
+.postcontent p {
+    padding: 10px;
+}
+
+.none {
+    display: none;
+}
+
+.postcontent input {
+    border: 0px;
+    width: 100%;
+    padding: 10px;
+    height: 100%;
+    font-size: 16px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f0f2f5;
+    height: 80px;
+    padding: 0px 20px;
+}
+
+.navbar>div {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.logoutlogo {
+    width: 50px;
+}
+
+.logoname {
+    font-size: 30px;
+    font-weight: 900;
+    font-family: cursive;
+    cursor: pointer;
+}
+
+.navbar>div>img {
+    height: 50%;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.image {
+    width: 100%;
+    height: fit-content;
+    padding: 10px 0px;
+}
+
+.image img {
+    width: 100%;
+    height: 100%;
+}
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 60px;
+    height: 60px;
+    animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(360deg);
+    }
+
+    50% {
+        transform: rotate(720deg);
+    }
+
+    75% {
+        transform: rotate(1080deg);
+    }
+
+    100% {
+        transform: rotate(1440deg);
+    }
+}
+
+@media screen and (max-width: 620px) {
+    div.addpost {
+        width: 90%;
+    }
+
+    div.post {
+        width: 90%;
+    }
+
+    div.addpost div.bottom div.button {
+        width: 90%;
+        margin-top: 10px;
+        justify-content: center;
+    }
+
+    .loader {
+        margin-top: 10px;
+    }
 }
