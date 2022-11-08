@@ -60,6 +60,11 @@ const Home = () => {
                         username: loggedusername,
                         postId: docRef1.id,
                     });
+                    const docRef2 = await addDoc(collection(db, 'myposts'), {
+                        text: postText,
+                        createdOn: serverTimestamp(),
+                        username: loggedusername,
+                    });
                     setIsLoading(false)
                 } catch (e) {
                     console.error("Error adding document: ", e);
@@ -89,6 +94,12 @@ const Home = () => {
                                     img: res?.data?.url,
                                     username: loggedusername,
                                     postId: docRef1.id,
+                                });
+                                const docRef2 = await addDoc(collection(db, 'myposts'), {
+                                    text: postText,
+                                    createdOn: serverTimestamp(),
+                                    img: res?.data?.url,
+                                    username: loggedusername,
                                 });
                                 setIsLoading(false)
                             } catch (e) {
@@ -167,7 +178,6 @@ const Home = () => {
             loggedusername = eachUser.username;
         }
     })
-
     return (
         <>
             <div className='navbar'>
@@ -210,7 +220,6 @@ const Home = () => {
                             <p>Post</p>
                         </div>) : (<div className='loader'></div>)
                     }
-
                 </div>
             </div>
             <hr />
