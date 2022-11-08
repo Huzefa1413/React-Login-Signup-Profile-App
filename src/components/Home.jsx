@@ -54,12 +54,14 @@ const Home = () => {
                         createdOn: serverTimestamp(),
                         username: loggedusername,
                     });
+                    // eslint-disable-next-line
                     const docRef = await addDoc(collection(db, 'users', loggedUser, 'posts'), {
                         text: postText,
                         createdOn: serverTimestamp(),
                         username: loggedusername,
                         postId: docRef1.id,
                     });
+                    // eslint-disable-next-line
                     const docRef2 = await addDoc(collection(db, 'myposts'), {
                         text: postText,
                         createdOn: serverTimestamp(),
@@ -88,6 +90,7 @@ const Home = () => {
                                     img: res?.data?.url,
                                     username: loggedusername,
                                 });
+                                // eslint-disable-next-line
                                 const docRef = await addDoc(collection(db, 'users', loggedUser, 'posts'), {
                                     text: postText,
                                     createdOn: serverTimestamp(),
@@ -95,6 +98,7 @@ const Home = () => {
                                     username: loggedusername,
                                     postId: docRef1.id,
                                 });
+                                // eslint-disable-next-line
                                 const docRef2 = await addDoc(collection(db, 'myposts'), {
                                     text: postText,
                                     createdOn: serverTimestamp(),
@@ -171,8 +175,9 @@ const Home = () => {
             unsubscribe();
         }
 
-    }, [])
+    }, [loggedUser])
     let loggedusername;
+    // eslint-disable-next-line
     users.map(eachUser => {
         if (eachUser.id === loggedUser) {
             loggedusername = eachUser.username;
@@ -186,17 +191,17 @@ const Home = () => {
                 </div>
                 <div className='home-profile'>
                     <div onClick={() => setHome(true)}>
-                        <img src={homes} className={home ? 'selected' : ''} />
+                        <img src={homes} alt='Home' className={home ? 'selected' : ''} />
                         <p>Home</p>
                     </div>
                     <div onClick={() => setHome(false)}>
-                        <img src={user} className={!home ? 'selected' : ''} />
+                        <img src={user} alt='User' className={!home ? 'selected' : ''} />
                         <p>User</p>
                     </div>
                 </div>
                 <div>
                     <Link to={'/'}>
-                        <img className='logoutlogo' src={logout} alt="" />
+                        <img className='logoutlogo' src={logout} alt="logout" />
                         <p className='logout'>Logout</p>
                     </Link>
                 </div>

@@ -2,9 +2,9 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, onSnapshot, query, serverTimestamp, orderBy } from "firebase/firestore";
+import { getFirestore, collection, addDoc, onSnapshot, query } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBMUmbLONQ_PZUUDq65jgO_eFhlTRBc1y0",
@@ -24,18 +24,24 @@ const Register = () => {
     const [users, setUsers] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
-    let unsubscribe = null;
-    const getRealtimeData = async () => {
-        const q = query(collection(db, "users"));
-        unsubscribe = onSnapshot(q, (querySnapshot) => {
-            const myusers = [];
-            querySnapshot.forEach((doc) => {
-                myusers.push({ id: doc.id, ...doc.data() });
+    useEffect(() => {
+        let unsubscribe = null;
+
+        const getRealtimeData = async () => {
+            const q = query(collection(db, "users"));
+            unsubscribe = onSnapshot(q, (querySnapshot) => {
+                const myusers = [];
+                querySnapshot.forEach((doc) => {
+                    myusers.push({ id: doc.id, ...doc.data() });
+                });
+                setUsers(myusers);
             });
-            setUsers(myusers);
-        });
-    }
-    getRealtimeData();
+        }
+        getRealtimeData();
+        return () => {
+            unsubscribe();
+        }
+    }, [])
     const formik = useFormik({
         initialValues: {
             username: "",
@@ -67,18 +73,25 @@ const Register = () => {
         onSubmit: async (values) => {
             setIsLoading(true)
             let userFound = false;
-            users.map(eachUser => {
-                if ((eachUser.email === values.email) && (eachUser.password === values.password)) {
-                    userFound = true;
-                }
-            })
-                (userFound ? alert('This User already exist') : savePost(values))
+            if (users.length > 0) {
+                // eslint-disable-next-line
+                users.map(eachUser => {
+                    if ((eachUser.email === values.email) && (eachUser.password === values.password)) {
+                        userFound = true;
+                    }
+                })
+                    (userFound ? (error()) : savePost(values))
+            }
         }
     })
-
+    const error = () => {
+        alert('This user already exist')
+        setIsLoading(false);
+    }
     const savePost = async (e) => {
 
         try {
+            // eslint-disable-next-line
             const docRef = await addDoc(collection(db, "users"), {
                 username: e.username,
                 email: e.email,
