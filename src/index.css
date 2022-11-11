@@ -259,6 +259,10 @@ div.buttonbox button:hover {
     width: 50px;
 }
 
+.logoutdiv a {
+    text-decoration: none;
+}
+
 .logoname {
     font-size: 30px;
     font-weight: 900;

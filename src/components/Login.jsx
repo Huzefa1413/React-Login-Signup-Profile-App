@@ -3,21 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useState } from 'react';
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, onSnapshot, query, } from "firebase/firestore";
-
-const firebaseConfig = {
-    apiKey: "AIzaSyBMUmbLONQ_PZUUDq65jgO_eFhlTRBc1y0",
-    authDomain: "react-login-signup-profile-app.firebaseapp.com",
-    projectId: "react-login-signup-profile-app",
-    storageBucket: "react-login-signup-profile-app.appspot.com",
-    messagingSenderId: "16424328171",
-    appId: "1:16424328171:web:25c8b69a4e51905ba457ae"
-};
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-// Initialize Cloud Firestore and get a reference to the service
-const db = getFirestore(app);
+import { collection, onSnapshot, query, } from "firebase/firestore";
+import { db } from '../firebaseConfig';
 
 const Login = () => {
     const navigate = useNavigate();

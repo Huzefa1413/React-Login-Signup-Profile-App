@@ -8,23 +8,10 @@ import homes from './assets/home.png';
 import user from './assets/user.png'
 import Posts from './Posts.jsx';
 import axios from 'axios';
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, onSnapshot, query, serverTimestamp, orderBy } from "firebase/firestore";
+import { collection, addDoc, onSnapshot, query, serverTimestamp, orderBy } from "firebase/firestore";
 import { Link } from 'react-router-dom';
 import logout from './assets/logout.png';
-
-const firebaseConfig = {
-    apiKey: "AIzaSyBMUmbLONQ_PZUUDq65jgO_eFhlTRBc1y0",
-    authDomain: "react-login-signup-profile-app.firebaseapp.com",
-    projectId: "react-login-signup-profile-app",
-    storageBucket: "react-login-signup-profile-app.appspot.com",
-    messagingSenderId: "16424328171",
-    appId: "1:16424328171:web:25c8b69a4e51905ba457ae"
-};
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-// Initialize Cloud Firestore and get a reference to the service
-const db = getFirestore(app);
+import { db } from '../firebaseConfig';
 
 const Home = () => {
 
@@ -199,7 +186,7 @@ const Home = () => {
                         <p>User</p>
                     </div>
                 </div>
-                <div>
+                <div className='logoutdiv'>
                     <Link to={'/'}>
                         <img className='logoutlogo' src={logout} alt="logout" />
                         <p className='logout'>Logout</p>
